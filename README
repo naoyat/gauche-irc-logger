@@ -1,0 +1,22 @@
+==================
+IRCロガーキット 0.1
+==================
+  // 取りまとめed by naoya_t
+
+- ロガーボット本体部分は、OKUYAMA Atsushi氏によるIRCBOTから名前付きパイプの機能を削ったもの
+  → http://homepage3.nifty.com/oatu/gauche/try.html#ircbot
+
+- ログビューアとかRSS生成部分は by @naoya_t
+- もともとawkとかrubyで書いてた各パーツを（単に練習のために）gaucheに移植
+
+- gauche 0.8.13で動作確認
+- irc.freenode.net でテスト
+- とりあえず utf-8 しか試してない
+
+- setting.scm で設定をいじる
+- htdocs に入ってるCGIファイルで２つのファイルを require しているが、適宜パスを合わせて
+
+- crontab に
+5 0 * * * /usr/local/bin/gosh rssfeed-gen.scm &> /dev/null
+とか適宜セットして
+
