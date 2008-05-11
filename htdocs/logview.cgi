@@ -5,6 +5,8 @@
 (require "../setting")
 (require "../lib/rawlog")
 
+(use srfi-19)
+
 (define (it s) #`"<i>,|s|</i>")
 (define (tt s) #`"<tt>,|s|</tt>")
 (define (brown s) #`"<font color=\"#cc9999\">,|s|</font>")
@@ -39,11 +41,9 @@
   
 (define query-string (sys-getenv "QUERY_STRING"))
 
-(unless (and query-string (rxmatch #/^20[0-9][0-9]-[01][0-9]-[0-3][0-9]$/ query-string))
-  (display "Content-type: text/html") (newline) (newline)
-  (error "invalid query string"))
-
-(define date-str query-string)
+(define date-str (if (and query-string (rxmatch #/^20[0-9][0-9]-[01][0-9]-[0-3][0-9]$/ query-string))
+                     query-string
+                     (date->string (current-date) "~Y-~m-~d")))
 
 (display "Content-type: text/html\r\n\r\n")
 (print "<html>
