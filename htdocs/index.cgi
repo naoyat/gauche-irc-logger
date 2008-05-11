@@ -25,7 +25,7 @@
 (string-join (map (lambda (path)
                     (let1 date-str (regexp-replace #/\.log$/ path "")
                       #`"<li><a href=\"logview.cgi?,|date-str|\">,|date-str|</a></li>\n"))
-                  (reverse! (glob "20[0-9][0-9]-[01][0-9]-[0-3][0-9].log")) ""))
+                  (reverse! (glob "20[0-9][0-9]-[01][0-9]-[0-3][0-9].log"))) "")
 
 "</ul>
 <hr />
